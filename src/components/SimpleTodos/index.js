@@ -1,4 +1,6 @@
-import {component} from 'react'
+
+// FIX1: The import statement for Component class should be written like this
+import {Component} from 'react'
 
 import TodoItem from '../TodoItem'
 
@@ -40,11 +42,13 @@ const initialTodosList = [
 ]
 
 class SimpleTodos extends Component {
-  state : {
-    todosList= initialTodosList,
+  // FIX2: The syntax to assign value to the state should be as mentioned below
+  state = {
+    todosList: initialTodosList,
   }
 
-  const deleteTodo = id => {
+  // FIX3: Here, the class method doesn't need keyword "const" for declaration
+  deleteTodo = id => {
     const {todosList} = this.state
     const updatedTodosList = todosList.filter(eachTodo => eachTodo.id !== id)
 
@@ -61,7 +65,8 @@ class SimpleTodos extends Component {
         <div className="simple-todos-container">
           <h1 className="heading">Simple Todos</h1>
           <ul className="todos-list">
-            {todosList[0].map(eachTodo => (
+            {/* FIX4: map() is an array method and should be used only on arrays */}
+            {todosList.map(eachTodo => (
               <TodoItem
                 key={eachTodo.id}
                 todoDetails={eachTodo}
